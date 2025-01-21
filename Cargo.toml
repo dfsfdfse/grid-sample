@@ -1,0 +1,16 @@
+[package]
+name = "grid-sample"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+burn = { version = "0.16", features = ["wgpu", "cuda-jit", "template"] }
+burn-jit = { version = "0.16" }
+cubecl = { version = "0.4", features = ["wgpu"] }
+derive-new = "0.7"
+bytemuck = "1.21"
+criterion = { git = "https://github.com/bheisler/criterion.rs.git", branch = "master", features = ["html_reports"] }
+
+[[bench]]
+name = "sample"
+harness = false
