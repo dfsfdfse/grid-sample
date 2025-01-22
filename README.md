@@ -13,3 +13,6 @@ The 4070s takes 5 microseconds, and its performance can be tested and viewed in 
 ```bash
   cargo test test_sample -- --nocapture
 ```
+
+### Performance
+[index.html](criterion/report/index.html)
