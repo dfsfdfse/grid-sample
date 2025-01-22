@@ -124,7 +124,7 @@ impl<R: JitRuntime ,F: FloatElement, I: IntElement, B: BoolElement> Backend1 for
         };
         let cube_count = CubeCount::Static(cx, cy, (input.shape.dims[0] * input.shape.dims[1]) as u32);
 
-        grid_sample_kernel::launch::<F, I, R>(
+        grid_sample_kernel::launch::<F, R>(
             &input.client,
             cube_count,
             cube_dim,

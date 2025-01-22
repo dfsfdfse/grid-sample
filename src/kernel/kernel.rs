@@ -1,7 +1,7 @@
 use cubecl::prelude::*;
 
 #[cube(launch)]
-pub fn grid_sample_kernel<F: Float, I: Int>(
+pub fn grid_sample_kernel<F: Float>(
     input: &Tensor<F>,
     grid: &Tensor<F>,
     output: &mut Tensor<F>,
