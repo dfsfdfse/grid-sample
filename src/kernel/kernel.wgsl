@@ -36,23 +36,21 @@ fn main(
     let c = batch / N;
     let h = workgroup_id.y * BLOCK_SIZE + local_idx % BLOCK_SIZE;
     let w = workgroup_id.x * BLOCK_SIZE + local_idx / BLOCK_SIZE;
-   
+    let grid_index = n * grid_H * grid_W + h * grid_W + w;
+        
+    let grid_index_x = grid_index * 2u;
+    let grid_index_y = grid_index_x + 1u;
+    let output_index = n * C * grid_H * grid_W + c * grid_H * grid_W + h * grid_W + w;
     if h >= grid_H || w >= grid_W {
         return;
     }
-    
-    let grid_index = n * grid_H * grid_W + h * grid_W + w;
-    
-    let grid_index_x = grid_index * 2u;
-    let grid_index_y = grid_index_x + 1u;
 
     var x = grid[grid_index_x];
     var y = grid[grid_index_y];
-    let a = input[1];
-
+    
     x = (x + 1.0) * f32(W) / 2.0 - 0.5;
     y = (y + 1.0) * f32(H) / 2.0 - 0.5;
-    let output_index = n * C * grid_H * grid_W + c * grid_H * grid_W + h * grid_W + w;
+    
     if x < 0.0 || x >= f32(W) || y < 0.0 || y >= f32(H) {
         output[output_index] = 0.0;
         return;
@@ -84,7 +82,6 @@ fn main(
     let value_b = input[input_index_b];
     let value_c = input[input_index_c];
     let value_d = input[input_index_d];
-
-    let result = wa * value_a + wb * value_b + wc * value_c + wd * value_d;
-    output[output_index] = result;
+    
+    output[output_index] = wa * value_a + wb * value_b + wc * value_c + wd * value_d;
 }

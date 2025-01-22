@@ -2,11 +2,11 @@ pub mod kernel;
 
 #[test]
 fn test_sample() {
+    use crate::kernel::backend::grid_sample_cube;
     use crate::kernel::backend::grid_sample;
     use burn::backend::wgpu::WgpuDevice;
     use burn::backend::wgpu::WgpuRuntime;
     use burn::prelude::Tensor;
-    //use burn::tensor::Distribution;
     use burn_jit::JitBackend;
 
     type Wgpu = JitBackend<WgpuRuntime, f32, i32, u32>;
@@ -139,6 +139,8 @@ fn test_sample() {
     );
     //println!("{:?}", v.shape());
     //println!("{:?}", g.shape());
-    let out = grid_sample(v, g);
-    println!("{}", out);
+    let out1 = grid_sample_cube(v.clone(), g.clone());
+    let out2 = grid_sample(v, g);
+    println!("{}", out1);
+    println!("{}", out2);
 }
