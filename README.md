@@ -15,4 +15,7 @@ The 4070s takes 5 microseconds, and its performance can be tested and viewed in 
 ```
 
 ### Performance
-[index.html](criterion/report/index.html)
+cube kernel
+![pdf_small.svg](criterion/cube/report/pdf_small.svg)
+wgsl kernel
+![pdf_small.svg](criterion/wgsl/report/pdf_small.svg)
